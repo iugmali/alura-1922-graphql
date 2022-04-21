@@ -1,17 +1,10 @@
 {
   "users": [
     {
-      "id": 2,
+      "id": 1,
       "nome": "Ana Torre",
       "ativo": true,
       "email": "a@a.com",
-      "role": 1
-    },
-    {
-      "id": 2,
-      "nome": "Gabriel Costa",
-      "ativo": true,
-      "email": "g@g.com",
       "role": 1
     },
     {
@@ -41,6 +34,22 @@
       "ativo": true,
       "email": "m@m.com",
       "role": 2
+    },
+    {
+      "nome": "Bruno Falcao",
+      "ativo": true,
+      "email": "iugmali@iugmali.com",
+      "role": 1,
+      "createdAt": "2022-04-21T00:00:00.000Z",
+      "id": 9
+    },
+    {
+      "nome": "Bruno Falcáo",
+      "ativo": true,
+      "email": "contato@iugmali.com",
+      "role": 1,
+      "createdAt": "2022-04-21T00:00:00.000Z",
+      "id": 10
     }
   ],
   "roles": [
