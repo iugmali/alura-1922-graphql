@@ -1,17 +1,30 @@
 const { ApolloServer } = require('apollo-server');
-const userSchema = require('./user/schema/user.graphql');
-const userResolvers = require('./user/resolvers/userResolvers.js')
-const UsersAPI = require('./user/datasource/user')
+const { mergeTypeDefs } = require('@graphql-tools/merge');
+const path = require('path');
 
-const typeDefs = [userSchema];
-const resolvers = [userResolvers];
+const {userSchema, userResolvers, UsersAPI} = require('./user');
+const {classroomSchema, classroomResolvers, ClassroomAPI} = require('./classroom');
+const {matriculaSchema, matriculaResolvers, MatriculasAPI} = require('./matricula');
+
+const typeDefs = mergeTypeDefs([userSchema, classroomSchema, matriculaSchema]);
+const resolvers = [userResolvers, classroomResolvers, matriculaResolvers];
+
+const dbConfig = {
+  client: 'sqlite3',
+  useNullAsDefault: true,
+  connection: {
+    filename: path.resolve(__dirname, './data/database.db')
+  }
+}
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   dataSources: () => {
     return {
-      usersAPI: new UsersAPI()
+      usersAPI: new UsersAPI(),
+      classroomAPI: new ClassroomAPI(dbConfig),
+      matriculasAPI: new MatriculasAPI(dbConfig)
     }
   }
 });

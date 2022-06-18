@@ -8,13 +8,33 @@ const classroomSchema = gql `
         period: String
         spots: Int
         beginAt: DateTime
-        professor: User!
+        docente: User!
         createdAt: DateTime!
+        matriculas: [Matricula]
+    }
+    input ClassroomInput {
+        descricao: String
+        horario: String
+        vagas: Int
+        inicio: DateTime
+        docente_id: Int
     }
     type Query {
         classes: [Classroom]
         classroom (id: ID!): Classroom
     }
+    type Mutation {
+        incluiTurma(classroom: ClassroomInput): Classroom!
+        atualizaTurma(id: ID!, classroom: ClassroomInput): Classroom!
+        deletaTurma(id: ID!): DefaultResponse!
+    }
+    interface Response {
+        message: String!
+    }
+    type DefaultResponse implements Response {
+        message: String!
+    }
+
 `
 
 module.exports = classroomSchema
